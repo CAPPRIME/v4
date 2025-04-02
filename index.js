@@ -43,6 +43,11 @@ routes.forEach(({ route, file }) => {
   });
 });
 
+// Modify the root route to serve the new index file
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'static/assets/rb/index.html'));
+});
+
 app.get('/student', (req, res) => {
   res.redirect('/portal');
 });
@@ -103,7 +108,6 @@ function shutdown(signal) {
 
 process.on('SIGTERM', () => shutdown('SIGTERM'));
 process.on('SIGINT', () => shutdown('SIGINT'));
-
 
 server.listen({
   port: 8001,
